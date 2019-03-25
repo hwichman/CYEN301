@@ -52,3 +52,4 @@ for line in sys.stdin:
     sys.stdout.write(decode(7,line))
     sys.stdout.write("\n")
     sys.stdout.write(decode(8,line))
+    sys.stdout.write("\n")
