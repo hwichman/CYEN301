@@ -1,3 +1,21 @@
+##########################################################################
+#
+#   Team: Incas
+#
+#   Members:    Matt LaCroix
+#               Ben Doughty
+#               Stella Li
+#               Seth Martin
+#               Haley Wichman
+#               Richard
+#
+#   Assignment 1 - Binary Decoder
+#
+#   Git Repo: https://github.com/hwichman/CYEN301/
+#
+##########################################################################
+
+
 #Binary Decoder
 import sys
 def decode(grouping,binaryString):
