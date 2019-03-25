@@ -3,11 +3,12 @@
 #   Team: Incas
 #
 #   Members:    Matt LaCroix
-#               Ben Doughty
+#               Ben Doughty, btd001@latech.edu
 #               Stella Li
 #               Seth Martin
 #               Haley Wichman
-#               Richard
+#               Richard Rose
+#               Bibhut Khadka
 #
 #   Assignment 2 - Vingenere Cipher
 #
