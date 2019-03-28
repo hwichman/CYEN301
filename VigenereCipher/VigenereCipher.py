@@ -34,19 +34,35 @@ alphabet = "abcdefghijklmnopqrstuvwxyz"
 def encode(key, text):
     cypher = ""
     # Loop through both strings and run them through the encode equation
-    for x, y in zip(text, key):
-        z = (alphabet.index(x) + alphabet.index(y)) % 26
+    for x in range(0,len(text)):
+        keyIndex = x % len(key)
+        if (text[x].lower() not in alphabet):
+            l = text[x]
+        else:
+            z = (alphabet.index(text[x].lower()) + alphabet.index(key[keyIndex].lower())) % 26
+            if (text[x].isupper()):
+                l = alphabet[z].upper()
+            else:
+                l = alphabet[z]
         # Add the letter at the index to the final string
-        cypher += alphabet[z]
+        cypher += l
     print(cypher)
 
 def decode (key, cypher):
     plaintext = ""
     # Loop through both strings and run them through the decode equation
-    for x, y in zip(cypher, key):
-        z = (26 + alphabet.index(x) - alphabet.index(y)) % 26
+    for x in range(0, len(cypher)):
+        keyIndex = x % len(key)
+        if (cypher[x].lower() not in alphabet):
+            l = cypher[x]
+        else:
+            z = (26 + alphabet.index(cypher[x].lower()) - alphabet.index(key[keyIndex].lower())) % 26
+            if (cypher[x].isupper()):
+                l = alphabet[z].upper()
+            else:
+                l = alphabet[z]
         # Add the letter at the index to the final string
-        plaintext += alphabet[z]
+        plaintext += l
     print(plaintext)
 
 
@@ -60,17 +76,17 @@ def main(argv):
         print("VigenereCipher.py -e <key> or -d <key>")
         sys.exit(2)
 
-    # Prompt user for input
-    print("Please input text: ")
-    userInput = input()
-
     # Check for arguments
     for opt, arg in opts:
         key = arg
-        if opt == "-e":
-            encode(key, userInput)
-        elif opt == "-d":
-            decode(key, userInput)
+        while (1):
+            userInput = input()
+            if ("^D" in userInput):
+                break
+            elif opt == "-e":
+                    encode(key, userInput)
+            elif opt == "-d":
+                decode(key, userInput)
             
 # Call main on program start
 if __name__ == "__main__":
