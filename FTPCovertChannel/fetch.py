@@ -19,11 +19,7 @@
 #FTP Covert Channel Decoder
 
 from ftplib import FTP
-def METHOD(files):
-    for line in files:
-        if (line[:3] != "---"):
-            return 10
-    return 7
+METHOD = 10
 
 def decode(grouping,binaryString):
     #detect if it is an 8 bit or 7 bit
@@ -58,29 +54,30 @@ def decode(grouping,binaryString):
 MAX_READTYPE = 10
 ftp = FTP('jeangourd.com','anonymous','')
 
+if (METHOD == 7):
+    ftp.cwd("7")
+elif (METHOD == 10):
+    ftp.cwd("10")
 files = []
 ftp.dir(files.append)
 
-#readType = METHOD(files)
-readType = 7
+readType = METHOD
 
 charString = ""
 if (readType <= MAX_READTYPE and readType > 0):
     for line in files:
-        print (line)
-        charString += line[10-readType:10]
+        # only adds string if first 3 chars are "---"
+        if (line[:3] == "---" or readType == 10):
+            charString += line[10-readType:10]
+        
 else:
     print ("Invalid read type range: should be 0 to ", MAX_READTYPE)
-print (charString)
 binaryString = ""
 for char in charString:
 	if (char == '-'):
 		binaryString += '0';
 	else:
 		binaryString += '1';
-print (binaryString)
 	
 print (decode(7, binaryString))
-print ("\n")
-print (decode(8, binaryString))
 print ("\n")
