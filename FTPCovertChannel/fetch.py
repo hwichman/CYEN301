@@ -68,7 +68,9 @@ charString = ""
 if (readType <= MAX_READTYPE and readType > 0):
     for line in files:
         print (line)
-        charString += line[10-readType:10]
+        # only adds string if first 3 chars are "---"
+        if (line[:3] == "---"):
+            charString += line[10-readType:10]
 else:
     print ("Invalid read type range: should be 0 to ", MAX_READTYPE)
 print (charString)
