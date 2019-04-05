@@ -6,7 +6,7 @@
 #               Ben Doughty, btd001@latech.edu
 #               Stella Li
 #               Seth Martin
-#               Haley Wichman
+#               Haley Wichman, hrw010@latech.edu
 #               Richard Rose
 #               Bibhut Khadka
 #
@@ -23,12 +23,9 @@ import ftplib
 #method "7" - skips files/folders where the first 3 permission bits are not "---"
 # this method also decodes using 7-bit groupings only
 #method "10" - uses all 10 permission bits; this uses all files/folders and concatenates all files in a directory
-# method may be encoded in 7-bit or 8-bit groupings, so both decoding methods are tried
-METHOD = 10
 
-#allows you to change working directory
-# test with main, 7, and 10
-workdir = "main"
+METHOD = 7      #can be 7 or 10 based on method used
+workdir = "7"   #allows to change the working directory, can be "main", "7" or "10" based on directory
 
 #decoder
 def decode(grouping,binaryString):
@@ -81,7 +78,7 @@ for index in range(len(files)):
 covertmessage = ""
 for permission in files:
     if (METHOD == 10) or (permission[:3] == "---"):
-        for letter in permission:
+        for letter in permission[10-METHOD:10]:
             if (letter == "-"):
                 covertmessage += '0'
             else:
@@ -90,8 +87,8 @@ for permission in files:
 #main
 print(decode(7, covertmessage))
 #if method "10" is used, this well also output an 8-bit-grouping variant of the decoded message
-if (METHOD == 10):
-    print(decode(8, covertmessage))
+#if (METHOD == 10):
+#    print(decode(8, covertmessage))
 
 
 
