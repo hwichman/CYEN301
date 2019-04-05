@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 ##########################################################################
 #
 #   Team: Incas
@@ -24,8 +25,8 @@ import ftplib
 # this method also decodes using 7-bit groupings only
 #method "10" - uses all 10 permission bits; this uses all files/folders and concatenates all files in a directory
 
-METHOD = 7      #can be 7 or 10 based on method used
-workdir = "7"   #allows to change the working directory, can be "main", "7" or "10" based on directory
+METHOD = 10      #can be 7 or 10 based on method used
+workdir = "10"   #allows to change the working directory, can be "main", "7" or "10" based on directory
 
 #decoder
 def decode(grouping,binaryString):
