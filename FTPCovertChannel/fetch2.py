@@ -26,6 +26,10 @@ import ftplib
 # method may be encoded in 7-bit or 8-bit groupings, so both decoding methods are tried
 METHOD = 10
 
+#allows you to change working directory
+# test with main, 7, and 10
+workdir = "main"
+
 #decoder
 def decode(grouping,binaryString):
     #detect if it is an 8 bit or 7 bit
@@ -57,6 +61,10 @@ def decode(grouping,binaryString):
 
 #connects to ftp server
 ftp = ftplib.FTP('jeangourd.com','anonymous','')
+
+#changes working directory if necessary
+if (workdir != 'main'):
+    ftp.cwd(workdir)
 
 #empty list to contain strings of file information
 files = []
