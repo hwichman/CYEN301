@@ -79,9 +79,6 @@ for permission in files:
             else:
                 covertmessage += '1'
 
-#debug
-covertmessage = '100001101100001010110011001111100101110100'
-
 #main
 print("Permissions: ", files)
 print("Binary-Encoded Message: ", covertmessage)
