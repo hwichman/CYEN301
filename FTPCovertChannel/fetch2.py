@@ -80,10 +80,8 @@ for permission in files:
                 covertmessage += '1'
 
 #main
-print("Permissions: ", files)
-print("Binary-Encoded Message: ", covertmessage)
-print("Decoded Message: ")
 print(decode(7, covertmessage))
+#if method "10" is used, this well also output an 8-bit-grouping variant of the decoded message
 if (METHOD == 10):
     print(decode(8, covertmessage))
 
