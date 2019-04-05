@@ -84,7 +84,7 @@ print("Permissions: ", files)
 print("Binary-Encoded Message: ", covertmessage)
 print("Decoded Message: ")
 print(decode(7, covertmessage))
-else:
+if (METHOD == 10):
     print(decode(8, covertmessage))
 
 
