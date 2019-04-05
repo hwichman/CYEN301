@@ -83,10 +83,8 @@ for permission in files:
 print("Permissions: ", files)
 print("Binary-Encoded Message: ", covertmessage)
 print("Decoded Message: ")
-if (METHOD == 7):
-    print(decode(7,covertmessage))
+print(decode(7, covertmessage))
 else:
-    print(decode(7, covertmessage))
     print(decode(8, covertmessage))
 
 
