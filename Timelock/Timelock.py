@@ -19,9 +19,10 @@
 #Timelock
 import datetime
 import md5
-currentTime = "2017 04 26 15 14 30"
-#currentTime = datetime.now(tzinfo=None)
-epochTime= "1974 06 01 08 57 23"
+import sys
+allowHardcodedTimeVariables = False
+hardcodedCurrentTime = "2017 04 26 15 14 30"
+hardcodedEpochTime= "1974 06 01 08 57 23"
 
 ####Daylight savings stuff####
 #a class containing the start month/day and end month/day of daylight savings
@@ -88,8 +89,16 @@ def digestedTimeDifferenceToCode(digestedTime):
 	return code
 
 ######   MAIN    #######
-dtEpochTime = timeStringToDatetime(epochTime)
-dtCurrentTime = timeStringToDatetime(currentTime)
+if (allowHardcodedTimeVariables):
+	print ("Warning: Hard-coded time variables is enabled.")
+	print ("Current Time: "+currentTime)
+	print ("Epoch Time  : "+epochTime)
+	dtEpochTime = timeStringToDatetime(hardcodedEpochTime)
+	dtCurrentTime = timeStringToDatetime(hardcodedCurrentTime)
+else:
+	line = sys.stdin.readline()
+	dtEpochTime = timeStringToDatetime(line)
+	dtCurrentTime = datetime.datetime.now()
 
 
 #calculate the time difference
@@ -110,7 +119,5 @@ digestedTime = md5.md5(md5.md5(str(usableTimeDifference)).hexdigest()).hexdigest
 
 #takes the first two alphabetic characters starting from the left and the first two numeric starting from the right to get the code
 code = digestedTimeDifferenceToCode(digestedTime)
-print ("Current Time: "+currentTime)
-print ("Epoch Time  : "+epochTime)
 print (code)
 
