@@ -31,9 +31,15 @@ def xor(text,key):
         i+=1                     
     return xorMsg
 
-        
+inData = ""
+for line in sys.stdin:
+	inData += line
 
-c = xor(m,k)
-print (c)
-new = xor(c,k)
-print (new)
+keyData= ""
+keyfile = open("key","r")
+for line in keyfile:
+	keyData += line
+
+sys.stdout.write(xor(inData, keyData))
+
+	
