@@ -18,11 +18,10 @@
 
 #XOR Crypto
 import sys
-import binascii
 k = "test"
 m = "this"
 
-
+#takes the text parameter and xors it with the key parameter and returns the result
 def xor(text,key):
     xorMsg = ""
     i = 0
@@ -31,15 +30,18 @@ def xor(text,key):
         i+=1                     
     return xorMsg
 
+#read input from stdin
 inData = ""
 for line in sys.stdin:
 	inData += line
 
+#read input from "key" file in the current directory
 keyData= ""
 keyfile = open("key","r")
 for line in keyfile:
 	keyData += line
 
+#write the xor'd output to stdout
 sys.stdout.write(xor(inData, keyData))
 
 	
