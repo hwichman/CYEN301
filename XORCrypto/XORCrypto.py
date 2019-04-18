@@ -17,3 +17,23 @@
 ##########################################################################
 
 #XOR Crypto
+import sys
+import binascii
+k = "test"
+m = "this"
+
+
+def xor(text,key):
+    xorMsg = ""
+    i = 0
+    for char in text:
+        xorMsg += chr(ord(char) ^ ord(key[i]))
+        i+=1                     
+    return xorMsg
+
+        
+
+c = xor(m,k)
+print (c)
+new = xor(c,k)
+print (new)
