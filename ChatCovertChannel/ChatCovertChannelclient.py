@@ -42,25 +42,47 @@ def receive():
             stdout.flush()
         except OSError:
             break
+    #disconnect from the server
+    stdout.write("[disconnect from the chat server]\n")
+    s.close()
+    covert_bin = covert_bin[1:]
     covert = ""
     i = 0
+    level = 0
     while (i < len(covert_bin)):
         # process one byte at a time
         b = covert_bin[i:i + 8]
         # convert it to ASCII
         n = int("0b{}".format(b), 2)
         try:
-            covert += unhexlify("{0:x}".format(n))
+	    char = unhexlify("{0:x}".format(n))
+            covert += char
+	# stop at the string "EOF"
+	    if (level == 0):
+		    if (char == 'E'):
+			    level+=1
+		    else:
+			    level=0
+	    elif (level == 1):
+		    if (char == 'O'):
+			    level+=1
+		    else:
+			    level=0
+	    elif (level == 2):
+		    if (char == 'F'):
+			    covert = covert[:-3]
+			    break
+		    else:
+			    level=0
         except TypeError:
             covert += "?"
-        # stop at the string "EOF"
         i += 8
     stdout.write(covert)
     
 
 #using constants
-ZERO = 0.1
-ONE = 0.025
+ZERO = 0.025
+ONE = 0.095
 HOST = 'jeangourd.com'
 PORT = 31337
 BUFSIZ = 4096
@@ -68,6 +90,6 @@ BUFSIZ = 4096
 ADDR = (HOST,PORT)
 s = socket(AF_INET, SOCK_STREAM)
 s.connect(ADDR)
-
+stdout.write("[connect to the chat server]\n")
 receive_thread = Thread(target=receive)
 receive_thread.start()
