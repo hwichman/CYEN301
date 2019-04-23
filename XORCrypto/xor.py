@@ -18,9 +18,6 @@
 
 #XOR Crypto
 import sys
-k = "test"
-m = "this"
-
 #takes the text parameter and xors it with the key parameter and returns the result
 def xor(text,key):
     xorMsg = ""

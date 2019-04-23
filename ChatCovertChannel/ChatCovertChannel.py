@@ -31,17 +31,22 @@ ONE = 0.1
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)       #create a socket
-    print = "socket sucessfully created"
+    print ("socket sucessfully created")
 
 except socket.error as err:
-    print "socket creation failed with with error %s" %(err)
+    print ("socket creation failed with with error %s" %(err))
+
+
+#ip = '138.47.148.167'
+ip='jeangourd.com'
+port = 1337
 
 s.connect((ip,port))    #connect serve on some ip and port
-port = 1337
 s.bind(("", port))      #bind the socket to port 1337
 s.listen(0)     #listen to connections
 
 c,addr = s.accept()
+print(c)
 
 msg = "Some message..."     #send message one character at a time
 n = 0
