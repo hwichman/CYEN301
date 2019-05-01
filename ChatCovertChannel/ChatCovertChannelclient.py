@@ -55,29 +55,29 @@ def receive():
         # convert it to ASCII
         n = int("0b{}".format(b), 2)
         try:
-	    char = unhexlify("{0:x}".format(n))
+            char = unhexlify("{0:x}".format(n))
             covert += char
-	# stop at the string "EOF"
-	    if (level == 0):
-		    if (char == 'E'):
-			    level+=1
-		    else:
-			    level=0
-	    elif (level == 1):
-		    if (char == 'O'):
-			    level+=1
-		    else:
-			    level=0
-	    elif (level == 2):
-		    if (char == 'F'):
-			    covert = covert[:-3]
-			    break
-		    else:
-			    level=0
+            # stop at the string "EOF"
+            if (level == 0):
+                if (char == 'E'):
+                    level+=1
+                else:
+                    level=0
+            elif (level == 1):
+                if (char == 'O'):
+                    level+=1
+                else:
+                    level=0
+            elif (level == 2):
+                if (char == 'F'):
+                    covert = covert[:-3]
+                    break
+                else:
+                    level=0
         except TypeError:
             covert += "?"
         i += 8
-    stdout.write(covert)
+        stdout.write(covert)
     
 
 #using constants
