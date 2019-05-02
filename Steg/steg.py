@@ -171,12 +171,23 @@ def ensteg():
     steggedfile.write(wrapperbytes)
 
 
+
 # decrypts a file using steganography
 def desteg():
+    
+    # reads wrapperfile into a byte array 'wrapperbytes'
+    with open(wrapperfile, "rb") as wrapper:
+        wread = wrapper.read()
+        wrapperbytes = bytearray(wread)
+
+    # creates empty byte array for hidden bytes
+    hidbytes = []
+    hiddenbytes = bytearray(hidbytes)
+        
     # Byte Method
     if (method == "B"):
-        i = 0
-        while (i < len(hiddenfile)):
+        i = offset
+        while (i < len(wrapperbytes)):
             
 
     # Bit Method
