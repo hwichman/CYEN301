@@ -131,14 +131,23 @@ else:
     wrapperfile = variables[4]
     hiddenfile = variables[5]
 
+sentinel = 
+
 # encrypts a file using steganography
 def ensteg():
 # Byte Method
     if (method == "B"):
         i = 0
         while (i < len(hiddenfile)):
-            
+            wrapperfile[offset] = hiddenfile[i]
+            offset += interval
+            i++
 
+    # insert sentinel
+    i = 0
+    while (i < len(sentinel)):
+        
+            
     # Bit Method
     if (method == "b"):
 
