@@ -131,30 +131,49 @@ else:
     wrapperfile = variables[4]
     hiddenfile = variables[5]
 
-sentinel = 
+sentinel = [0x0, 0xff, 0x0, 0x0, 0xff, 0x0]
 
 # encrypts a file using steganography
 def ensteg():
-# Byte Method
+    
+    # reads hiddenfile into a byte array 'hiddenbytes'
+    with open(hiddenfile, "rb") as hidden:
+        hread = hidden.read()
+        hiddenbytes = bytearray(hread)
+        
+    # reads wrapperfile into a byte array 'wrapperbytes'
+    with open(wrapperfile, "rb") as wrapper:
+        wread = wrapper.read()
+        wrapperbytes = bytearray(wread)
+        
+    # Byte Method
     if (method == "B"):
         i = 0
-        while (i < len(hiddenfile)):
-            wrapperfile[offset] = hiddenfile[i]
+        while (i < len(hiddenbytes)):
+            wrapperbytes[offset] = hiddenbytes[i]
             offset += interval
             i++
 
     # insert sentinel
     i = 0
     while (i < len(sentinel)):
-        
-            
+        wrapperbytes[offset] = sentinel[i]
+        offset += interval
+        i++
+             
     # Bit Method
-    if (method == "b"):
+    #if (method == "b"):
+
+
+
+    # writes the new file
+    steggedfile = open(wrapperfile, "w+")
+    steggedfile.write(wrapperbytes)
 
 
 # decrypts a file using steganography
 def desteg():
-# Byte Method
+    # Byte Method
     if (method == "B"):
         i = 0
         while (i < len(hiddenfile)):
