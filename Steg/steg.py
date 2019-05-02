@@ -131,6 +131,37 @@ else:
     wrapperfile = variables[4]
     hiddenfile = variables[5]
 
+# encrypts a file using steganography
+def ensteg():
+# Byte Method
+    if (method == "B"):
+        i = 0
+        while (i < len(hiddenfile)):
+            
+
+    # Bit Method
+    if (method == "b"):
+
+
+# decrypts a file using steganography
+def desteg():
+# Byte Method
+    if (method == "B"):
+        i = 0
+        while (i < len(hiddenfile)):
+            
+
+    # Bit Method
+    if (method == "b"):
+
+
+
+# encrypts or decrypts a file, based on specified direction
+if direction == "s":
+    ensteg()
+else:
+    desteg()
+
 
     #debug print statements
     print ("method:",method)
