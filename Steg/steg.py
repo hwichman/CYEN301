@@ -117,7 +117,72 @@ def parse(argv):
             return invalid, errormsg
     return method, direction, offset, interval, wrapperfile, hiddenfile, invalid, errormsg      
 
+
+# Convert files to bytes
+def convertFileToBytes(file):
+    fileBytes = bytearray(open(file, "rb"))
+    return fileBytes
+
+# Byte Method
+def byteEncodeExtract(offset, interval, sentinel, hidden, wrapper, direction):
+
+    # Convert hidden and wrapper files to byte arrays
+    hiddenBytes = convertFileToBytes(hidden)
+    wrapperBytes = convertFileToBytes(wrapper)
+
+    if direction == "s":
+        # Store hidden file using the byte method
+        i = 0
+        j = 0
+        while i < hiddenBytes.__len__():
+            wrapperBytes[offset] = hiddenBytes[i]
+            offset += interval
+            i += 1
+        while j < sentinel.__len__():
+            wrapperBytes[offset] = sentinel[j]
+            offset += interval
+            j += 1
+    elif direction == "r":
+        # Retrieve
+        return
+    else:
+        error = "Error: value not equal to 's' or 'r'"
+        return error
+
+# Bit Method
+def bitEncodeExtract(offset, interval, sentinel, hidden, wrapper, direction):
+
+    # Convert hidden and wrapper files to byte arrays
+    hiddenBytes = convertFileToBytes(hidden)
+    wrapperBytes = convertFileToBytes(wrapper)
+
+    if direction == "s":
+        # Store file using the bit method
+        hiddenBytes += sentinel
+        i = offset
+        j = 0
+
+        while j < hiddenBytes.__len__():
+            for k in range(0,7):
+                wrapperBytes[i] &= 11111110
+                wrapperBytes[i] |= ((hiddenBytes[j] & 10000000) >> 7)
+                hiddenBytes[i] <<= 1
+                i += interval
+            j += 1
+    elif direction == "r":
+        # Retrieve file using bit method
+        return
+
+
 #MAIN
+SENTINEL = bytearray()
+SENTINEL.append(0x0)
+SENTINEL.append(0xff)
+SENTINEL.append(0x0)
+SENTINEL.append(0x0)
+SENTINEL.append(0xff)
+SENTINEL.append(0x0)
+
 variables = parse(sys.argv[1:])
 if (variables[0] == 1):
     sys.stdout.write("Invalid argument\n")
@@ -139,5 +204,13 @@ else:
     print ("interval:",interval)
     print ("wrapperfile:",wrapperfile)
     print ("hiddenfile:",hiddenfile)
+
+    if method == "b":
+        # Use bit method
+        bitEncodeExtract(offset, interval, SENTINEL, hiddenfile, wrapperfile, direction)
+    elif method == "B":
+        # Use byte method
+        byteEncodeExtract(offset, interval, SENTINEL, hiddenfile, wrapperfile, direction)
+    
 
 
