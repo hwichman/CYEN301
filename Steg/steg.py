@@ -155,12 +155,12 @@ def ensteg():
             offset += interval
             i += 1
 
-    # insert sentinel
-    i = 0
-    while (i < len(sentinel)):
-        wrapperbytes[offset] = sentinel[i]
-        offset += interval
-        i += 1
+        # insert sentinel
+        i = 0
+        while (i < len(sentinel)):
+            wrapperbytes[offset] = sentinel[i]
+            offset += interval
+            i += 1
              
     # Bit Method
     if (method == "b"):
@@ -205,20 +205,44 @@ def desteg():
         for j in range(len(sentinel)):
             sentineltest.append(wrapperbytes[i + j*interval])
         # checks the current byte plus next 5 bytes to see if it matches the sentinel (which will break the loop)
-        while ((i+6 < len(wrapperbytes)) and (sentineltest != sentinel)):
+        while (sentineltest != sentinel):
             hiddenbytes.append(wrapperbytes[i])
             i += interval
             # updates the sentineltest list
             del sentineltest[0]
-            sentineltest.append(wrapperbytes[i+interval*5])
+            sentineltest.append(wrapperbytes[i+interval*(len(sentinel)-1)])
 
     # Bit Method
-    #if (method == "b"):
+    if (method == "b"):
+        i = offset
+        # creates a bit version of the sentinel
+        # creates a byte for each bit in the original sentinel
+        # where only the least significant bit is used
+        bitsentinel = []
+        for byte in sentinel:
+            for k in range(8):
+                temp = byte & 0b00000001
+                bitsentinel.append(temp)
+                byte >>= 1
+        # creates a test for sentinel
+        sentineltest = []
+        for j in range(len(bitsentinel)):
+            sentineltest.append(wrapperbytes[i + j*interval] & 0b00000001)
+        while (sentineltest != bitsentinel):
+            hiddenbyte = 0b00000000
+            for k in range(8):
+                hiddenbyte <<= 1
+                hiddenbyte += wrapperbytes[i] & 0b00000001
+                i += interval
+                # updates the sentineltest list
+                del sentineltest[0]
+                sentineltest.append(wrapperbytes[i+interval*(len(bitsentinel)-1)] & 0b00000001)
+            hiddenbytes.append(hiddenbyte)
 
     # writes the new file
     sys.stdout(hiddenbytes)
     #unsteggedfile = open(outputfile, "wb+")
-    #unsteggedfile.write(hiddenbytes)
+    #unsteggedfile.write(hiddenbytes))
 
 
 
