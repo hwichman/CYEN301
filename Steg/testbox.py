@@ -2,14 +2,15 @@ method = "B"
 direction = "r"
 offset = 1024
 interval = 8
-wrapperfile = "stegged-byte.bmp"
-hiddenfile = "none.txt"
-outputfile = "unstegged.text"
+wrapperfile = "steggedtest.bmp"
+hiddenfile = "incaflag.bmp"
+outputfile = "unsteggedtest.bmp"
 
 sentinel = [0x0, 0xff, 0x0, 0x0, 0xff, 0x0]
 
 # encrypts a file using steganography
 def ensteg():
+    global offset
     
     # reads hiddenfile into a byte array 'hiddenbytes'
     with open(hiddenfile, "rb") as hidden:
@@ -42,7 +43,7 @@ def ensteg():
 
 
     # writes the new file
-    steggedfile = open(wrapperfile, "wb+")
+    steggedfile = open(outputfile, "wb+")
     steggedfile.write(wrapperbytes)
 
 
@@ -71,7 +72,7 @@ def desteg():
             i += interval
             # updates the sentineltest list
             del sentineltest[0]
-            sentineltest.append(wrapperbytes[i+offset*5])
+            sentineltest.append(wrapperbytes[i+interval*5])
 
     # Bit Method
     #if (method == "b"):

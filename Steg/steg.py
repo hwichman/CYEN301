@@ -135,6 +135,7 @@ sentinel = [0x0, 0xff, 0x0, 0x0, 0xff, 0x0]
 
 # encrypts a file using steganography
 def ensteg():
+    global offset
     
     # reads hiddenfile into a byte array 'hiddenbytes'
     with open(hiddenfile, "rb") as hidden:
@@ -152,14 +153,14 @@ def ensteg():
         while (i < len(hiddenbytes)):
             wrapperbytes[offset] = hiddenbytes[i]
             offset += interval
-            i++
+            i += 1
 
     # insert sentinel
     i = 0
     while (i < len(sentinel)):
         wrapperbytes[offset] = sentinel[i]
         offset += interval
-        i++
+        i += 1
              
     # Bit Method
     #if (method == "b"):
@@ -167,7 +168,7 @@ def ensteg():
 
 
     # writes the new file
-    steggedfile = open(wrapperfile, "wb+")
+    steggedfile = open(outputfile, "wb+")
     steggedfile.write(wrapperbytes)
 
 
@@ -196,7 +197,7 @@ def desteg():
             i += interval
             # updates the sentineltest list
             del sentineltest[0]
-            sentineltest.append(wrapperbytes[i+offset*5])
+            sentineltest.append(wrapperbytes[i+interval*5])
 
     # Bit Method
     #if (method == "b"):
