@@ -163,9 +163,21 @@ def ensteg():
         i += 1
              
     # Bit Method
-    #if (method == "b"):
-
-
+    if (method == "b"):
+        # adds sentinel to hiddenbytes array
+        for byte in sentinel:
+            hiddenbytes.append(byte)
+        i = offset
+        j = 0
+        while (j < len(hiddenbytes)):
+            for k in range(8):
+                wrapperbytes[i] &= 0b11111110
+                wrapperbytes[i] |= ((hiddenbytes[j] & 0b10000000) >> 7)
+                # zeroes most sig. bit before shift
+                hiddenbytes[j] &= 0b01111111
+                hiddenbytes[j] <<= 1
+                i += interval
+            j += 1
 
     # writes the new file
     sys.stdout(wrapperbytes)

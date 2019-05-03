@@ -46,7 +46,7 @@ def ensteg():
         j = 0
         while (j < len(hiddenbytes)):
             for k in range(8):
-                wrapperbytes[i] &= 0b1111110
+                wrapperbytes[i] &= 0b11111110
                 wrapperbytes[i] |= ((hiddenbytes[j] & 0b10000000) >> 7)
                 # zeroes most sig. bit before shift
                 hiddenbytes[j] &= 0b01111111
