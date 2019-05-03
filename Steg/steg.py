@@ -242,7 +242,7 @@ def desteg():
     # writes the new file
     sys.stdout.write(hiddenbytes)
     #unsteggedfile = open(outputfile, "wb+")
-    #unsteggedfile.write(hiddenbytes))
+    #unsteggedfile.write(hiddenbytes)
 
 
 
@@ -253,12 +253,12 @@ else:
     desteg()
 
 
-    #debug print statements
-    print ("method:",method)
-    print ("direction:",direction)
-    print ("offset:",offset)
-    print ("interval:",interval)
-    print ("wrapperfile:",wrapperfile)
-    print ("hiddenfile:",hiddenfile)
+##    #debug print statements
+##    print ("method:",method)
+##    print ("direction:",direction)
+##    print ("offset:",offset)
+##    print ("interval:",interval)
+##    print ("wrapperfile:",wrapperfile)
+##    print ("hiddenfile:",hiddenfile)
 
 

@@ -2,7 +2,7 @@ method = "b"
 direction = "r"
 offset = 1024
 interval = 1
-wrapperfile = "steggedtest.bmp"
+wrapperfile = "stegged-bit.bmp"
 hiddenfile = "incaflag.bmp"
 outputfile = "unsteggedtest.bmp"
 
@@ -55,9 +55,9 @@ def ensteg():
             j += 1
 
     # writes the new file
-    sys.stdout(wrapperbytes)
-    #steggedfile = open(outputfile, "wb+")
-    #steggedfile.write(wrapperbytes)
+    #sys.stdout.write(wrapperbytes)
+    steggedfile = open(outputfile, "wb+")
+    steggedfile.write(wrapperbytes)
 
 
 
@@ -115,9 +115,9 @@ def desteg():
             hiddenbytes.append(hiddenbyte)
 
     # writes the new file
-    sys.stdout(hiddenbytes)
-    #unsteggedfile = open(outputfile, "wb+")
-    #unsteggedfile.write(hiddenbytes))
+    #sys.stdout.write(hiddenbytes)
+    unsteggedfile = open(outputfile, "wb+")
+    unsteggedfile.write(hiddenbytes)
 
 
 
