@@ -25,7 +25,7 @@ def parse(argv):
     method = "b"
     direction = "s"
     offset = 0
-    interval = 0
+    interval = 1
     wrapperfile = "wrapper.txt"
     hiddenfile = "hidden.txt"
     outputfile = "none"
