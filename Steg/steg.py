@@ -180,7 +180,7 @@ def ensteg():
             j += 1
 
     # writes the new file
-    sys.stdout(wrapperbytes)
+    sys.stdout.write(wrapperbytes)
     #steggedfile = open(outputfile, "wb+")
     #steggedfile.write(wrapperbytes)
 
@@ -240,7 +240,7 @@ def desteg():
             hiddenbytes.append(hiddenbyte)
 
     # writes the new file
-    sys.stdout(hiddenbytes)
+    sys.stdout.write(hiddenbytes)
     #unsteggedfile = open(outputfile, "wb+")
     #unsteggedfile.write(hiddenbytes))
 
