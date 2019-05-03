@@ -126,8 +126,8 @@ if (variables[0] == 1):
 else:
     method = variables[0]
     direction = variables[1]
-    offset = variables[2]
-    interval = variables[3]
+    offset = int(variables[2])
+    interval = int(variables[3])
     wrapperfile = variables[4]
     hiddenfile = variables[5]
 
