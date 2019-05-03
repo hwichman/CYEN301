@@ -167,7 +167,7 @@ def ensteg():
 
 
     # writes the new file
-    steggedfile = open(wrapperfile, "w+")
+    steggedfile = open(wrapperfile, "wb+")
     steggedfile.write(wrapperbytes)
 
 
@@ -181,17 +181,29 @@ def desteg():
         wrapperbytes = bytearray(wread)
 
     # creates empty byte array for hidden bytes
-    hidbytes = []
-    hiddenbytes = bytearray(hidbytes)
+    hiddenbytes = bytearray([])
         
     # Byte Method
     if (method == "B"):
         i = offset
-        while (i < len(wrapperbytes)):
-            
+        # creates a test for sentinel
+        sentineltest = []
+        for j in range(len(sentinel)):
+            sentineltest.append(wrapperbytes[i + j*interval])
+        # checks the current byte plus next 5 bytes to see if it matches the sentinel (which will break the loop)
+        while ((i+6 < len(wrapperbytes)) and (sentineltest != sentinel)):
+            hiddenbytes.append(wrapperbytes[i])
+            i += interval
+            # updates the sentineltest list
+            del sentineltest[0]
+            sentineltest.append(wrapperbytes[i+offset*5])
 
     # Bit Method
-    if (method == "b"):
+    #if (method == "b"):
+
+    # writes the new file
+    unsteggedfile = open(outputfile, "wb+")
+    unsteggedfile.write(hiddenbytes)
 
 
 
