@@ -1,10 +1,10 @@
-method = "B"
-direction = "r"
+method = "b"
+direction = "s"
 offset = 1024
-interval = 8
-wrapperfile = "steggedtest.bmp"
+interval = 1
+wrapperfile = "incaflag2.bmp"
 hiddenfile = "incaflag.bmp"
-outputfile = "unsteggedtest.bmp"
+outputfile = "steggedtest.bmp"
 
 sentinel = [0x0, 0xff, 0x0, 0x0, 0xff, 0x0]
 
@@ -38,9 +38,21 @@ def ensteg():
         i += 1
              
     # Bit Method
-    #if (method == "b"):
-
-
+    if (method == "b"):
+        # adds sentinel to hiddenbytes array
+        for byte in sentinel:
+            hiddenbytes.append(byte)
+        i = offset
+        j = 0
+        while (j < len(hiddenbytes)):
+            for k in range(8):
+                wrapperbytes[i] &= 0b1111110
+                wrapperbytes[i] |= ((hiddenbytes[j] & 0b10000000) >> 7)
+                # zeroes most sig. bit before shift
+                hiddenbytes[j] &= 0b01111111
+                hiddenbytes[j] <<= 1
+                i += interval
+            j += 1
 
     # writes the new file
     steggedfile = open(outputfile, "wb+")

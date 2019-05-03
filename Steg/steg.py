@@ -168,8 +168,9 @@ def ensteg():
 
 
     # writes the new file
-    steggedfile = open(outputfile, "wb+")
-    steggedfile.write(wrapperbytes)
+    sys.stdout(wrapperbytes)
+    #steggedfile = open(outputfile, "wb+")
+    #steggedfile.write(wrapperbytes)
 
 
 
@@ -203,8 +204,9 @@ def desteg():
     #if (method == "b"):
 
     # writes the new file
-    unsteggedfile = open(outputfile, "wb+")
-    unsteggedfile.write(hiddenbytes)
+    sys.stdout(hiddenbytes)
+    #unsteggedfile = open(outputfile, "wb+")
+    #unsteggedfile.write(hiddenbytes)
 
 
 
