@@ -1,0 +1,17 @@
+from pynput import keyboard
+from time import sleep
+from random import uniform
+from terminos import tcflush, TCIFLUSH
+from sys import stdin, stdout
+
+keyboard = Controller()
+
+string = "This is supposed to be a fake string"
+
+for char in string:
+    keyboard,press(char)
+    sleep(uniform(0.2,0.2))
+    keyboard.release(char)
+
+tcflush(stdout, TCIFLUSH)
+print
