@@ -28,16 +28,22 @@ def receive():
     covert_bin = ""
     while True:
         try:
+            #record the time
             t0 = time()
             data = s.recv(BUFSIZ)
+            #record the time again
             t1 = time()
             if (data.rstrip("\n") == "EOF"):
                 break
+            #calculate the time difference
             delta = round(t1-t0,3)
+            #Append 1 or 0 to the binary string depending
+            #on the difference between this character and the previous character
             if (delta >= ONE):
                 covert_bin += "1"
             else:
                 covert_bin += "0"
+            #write the data to stdout
             stdout.write(data)
             stdout.flush()
         except OSError:
@@ -45,6 +51,7 @@ def receive():
     #disconnect from the server
     stdout.write("[disconnect from the chat server]\n")
     s.close()
+    #Now convert the binary string
     covert_bin = covert_bin[1:]
     covert = ""
     i = 0
