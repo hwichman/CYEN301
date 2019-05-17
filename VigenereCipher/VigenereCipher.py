@@ -51,11 +51,13 @@ def encode(key, text):
 def decode (key, cypher):
     plaintext = ""
     # Loop through both strings and run them through the decode equation
+    i = 0
     for x in range(0, len(cypher)):
-        keyIndex = x % len(key)
+        keyIndex = i % len(key)
         if (cypher[x].lower() not in alphabet):
             l = cypher[x]
         else:
+            i+=1
             z = (26 + alphabet.index(cypher[x].lower()) - alphabet.index(key[keyIndex].lower())) % 26
             if (cypher[x].isupper()):
                 l = alphabet[z].upper()
