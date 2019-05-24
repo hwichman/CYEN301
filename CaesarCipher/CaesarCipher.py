@@ -1,5 +1,6 @@
 import sys
-from pycipher import Caesar
+
+alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 ### Main ###
 
@@ -11,9 +12,6 @@ try:
     key = int(sys.argv[1])
 except:
     print "Key must be an integer."
-# Make sure key number is within 1-26
-if key not in range(1,26):
-    raise Exception("Key out of range.") 
 
 # Get user input for encoded text
 cypherText = raw_input()
@@ -23,9 +21,20 @@ cypherText = cypherText.split(" ")
 
 plainText = []
 
+
 # Decode each word based on the key and add it to the plainText list
 for word in cypherText:
-    plainText.append(Caesar(key).decipher(word))
+    plainWord = ""
+    for character in word:
+        # Shift index of character by key.
+        x = alphabet.index(character)
+        x = (x - key) % 26
+        # Decrypted character is the character at the new index
+        character = alphabet[x]
+        # Add character to decrypted word
+        plainWord.append(character)
+    plainWord = "".join(plainWord)
+    plainText.append(plainWord)
 
 # Join everything together and print it
 # Make everything lowercase because Caesar() prints it in upper

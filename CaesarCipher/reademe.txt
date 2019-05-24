@@ -1,11 +1,10 @@
 Instructions for CaesarCipher.py
 
-NOTE: Program is written in 2.7 and requires the Caesar function from the pycipher library.
-python2.7 should be the default if you're using your linux vms to just typing python is fine.
-
-For pycipher: "pip install pycipher --user"
-
 Command Line: "python CaesarCipher.py <key>"
 Where key is an integer from 1-25 that tells the program how far the letters are shifted.
 
 Can input the encoded text directly or through a file and the program should spit it out decoded.
+
+Modifying for a custom alphabet shouldn't be hard. I think all that needs to be done is replacing the alphabet at the top of the program.
+
+May need to modify to work with negative integers if they get evil.
