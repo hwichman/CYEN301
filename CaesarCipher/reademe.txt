@@ -1,5 +1,7 @@
 Instructions for CaesarCipher.py
 
+NOTE: Made in 2.7. If you're on your linux vm it should be the default version if you just type "python"
+
 Command Line: "python CaesarCipher.py <key>"
 Where key is an integer from 1-25 that tells the program how far the letters are shifted.
 
